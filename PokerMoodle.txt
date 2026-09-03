@@ -1,0 +1,412 @@
+<div id="lewywynik" class="lewywynik">
+    &lt;-Wynik
+</div>
+<div class="gameplay">
+
+    <div class="lewy">
+        <p onclick="dodaj(this)">⚀</p>
+        <p onclick="dodaj(this)">⚀</p>
+        <p onclick="dodaj(this)">⚀</p>
+        <p onclick="dodaj(this)">⚀</p>
+        <p onclick="dodaj(this)">⚀</p>
+    </div>
+
+    <div class="prawy">
+        <p onclick="dodaj(this)">⚀</p>
+        <p onclick="dodaj(this)">⚀</p>
+        <p onclick="dodaj(this)">⚀</p>
+        <p onclick="dodaj(this)">⚀</p>
+        <p onclick="dodaj(this)">⚀</p>
+    </div>
+
+</div>
+<div id="realnywynik">0 - 0</div>
+<div id="prawywynik" class="prawywynik">
+    Wynik-&gt;
+</div>
+<div class="negro" id="start">
+    <button onclick="RundaP()">START</button>
+</div>
+<div class="negro niema" id="koniecxd">
+    <button onclick="RundaD()">LEWY</button>
+</div>
+<div class="negro niema" id="terazrealkoniec">
+    <button onclick="RundaT()">PRAWY</button>
+</div>
+
+
+
+<script>
+    const style = (selector, styles) => {
+        document.querySelectorAll(selector).forEach(el => {
+            Object.assign(el.style, styles); // Czarna Magia z Redita
+        });
+    };
+
+    style(".gameplay", {
+        display: "flex",
+        width: "50%",
+        flexDirection: "row",
+        marginLeft: "auto",
+        marginRight: "auto"
+    });
+
+
+    style(".gameplay button", {
+        width: "100px"
+    });
+
+    style(".lewy", {
+        flex: "1"
+    });
+
+    style(".prawy", {
+        flex: "0"
+    });
+
+    style(".negro", {
+        marginLeft: "auto",
+        marginRight: "auto",                                                                                                                                                                                        //Autorstwa: Kozu
+        width: "50%",
+        textAlign: "center"
+    });
+
+    style(".zgrupa", {
+        backgroundColor: "green"
+    });
+
+    style(".niema", {
+        display: "none"
+    });
+    style(".prawywynik", {
+
+        marginTop: "2.137vh",
+        fontSize: "2.9vh",
+        textAlign: "center",
+        fontWeight: "bolder"
+    });
+
+    style(".lewywynik", {
+
+        fontSize: "2.9vh",
+        width: "100%",
+        textAlign: "center",
+        fontWeight: "bolder"
+    });
+
+    style("#realnywynik", {
+        textAlign: "center"
+    });
+
+    style(".lewy P", {
+        width: "5.5vh",
+        fontSize: "6.9vh"
+    });
+
+    style(".prawy P", {
+        width: "5,5vh",
+        fontSize: "6.9vh"
+    });
+    var TEST = [0, 0, 0, 0, 0]
+    var TSET = [0, 0, 0, 0, 0]
+    var wynikx = 0;
+    var wyniky = 0;
+    x = document.querySelectorAll(".lewy p")
+    y = document.querySelectorAll(".prawy p")
+
+    function RundaP() {
+        //alert("nigga")
+        //console.log(x[1])
+        x.forEach(Losowanie)
+        y.forEach(Losowanie)
+        document.getElementById("start").style.display = "none";
+        document.getElementById("koniecxd").style.display = "";
+        document.getElementById("prawywynik").innerHTML = "Wynik ->"
+        document.getElementById("lewywynik").innerHTML = "<- Wynik"
+        document.getElementById("lewywynik").style.color = " "
+        document.getElementById("prawywynik").style.color = " "
+        document.getElementById("lewywynik").style.color = " "
+        document.getElementById("prawywynik").style.color = " "
+        document.getElementById("lewywynik").style.color = " "
+        document.getElementById("prawywynik").style.color = " "
+    }
+
+    function Losowanie(item, index) {
+        //console.log(index + item.innerHTML)
+        SREDNIA = Math.ceil(Math.random() * 6)
+        switch (SREDNIA) {
+            case 1:
+                item.innerHTML = "⚀";
+                break;
+            case 2:
+                item.innerHTML = "⚁";
+                break;
+            case 3:
+                item.innerHTML = "⚂";
+                break;
+            case 4:
+                item.innerHTML = "⚃";
+                break;
+            case 5:
+                item.innerHTML = "⚄";
+                break;
+            default:
+                item.innerHTML = "⚅";
+        }
+        item.classList.add("bezgrupy")
+        item.classList.remove("zgrupa")
+        //console.log(index + item.innerHTML)
+
+    }
+
+    function dodaj(item) {
+        //console.log(item)
+        if (item.style.backgroundColor === "green") {
+            item.style.backgroundColor = "white";
+        } else {
+            item.style.backgroundColor = "green"
+        }
+    }
+
+    function RundaD() {
+        x.forEach(DobraFunkcja)
+        document.getElementById("koniecxd").style.display = "none";
+    }
+
+    function RundaT() {
+
+        y.forEach(DobraFunkcja)
+        document.getElementById("terazrealkoniec").style.display = "none";
+        zlicz();
+    }
+
+    function DobraFunkcja(item, index) {
+        if (item.style.backgroundColor == "green") {
+            SREDNIA = Math.ceil(Math.random() * 6)
+            //item.src="rysunek" + SREDNIA + ".png" 
+            switch (SREDNIA) {
+                case 1:
+                    item.innerHTML = "⚀";
+                    break;
+                case 2:
+                    item.innerHTML = "⚁";
+                    break;
+                case 3:
+                    item.innerHTML = "⚂";
+                    break;
+                case 4:
+                    item.innerHTML = "⚃";
+                    break;
+                case 5:
+                    item.innerHTML = "⚄";
+                    break;
+                default:
+                    item.innerHTML = "⚅";
+            }
+        }
+        item.style.backgroundColor = " "
+        document.getElementById("terazrealkoniec").style.display = "";
+
+    }
+
+    function zlicz() {
+        x.forEach(lewandowski)
+        y.forEach(prawda)
+
+        console.log(TEST)
+        console.log(TSET)
+        //////////////////////////////////////////
+        const zliczanie = {};
+
+        for (const Yhym of TEST) {
+            zliczanie[Yhym] = (zliczanie[Yhym] || 0) + 1;
+        }
+        console.log(zliczanie);
+
+        //////////////////////////////////////////
+        const zliczanie2 = {};
+
+        for (const Yhym of TSET) {
+            zliczanie2[Yhym] = (zliczanie2[Yhym] || 0) + 1;
+        }
+        console.log(zliczanie2);
+        //////////////////////////////////////////
+        let wartosci = Object.values(zliczanie).sort((a, b) => b - a);
+        let wartosci2 = Object.values(zliczanie2).sort((a, b) => b - a);
+        console.log(wartosci)
+        console.log(wartosci2)
+
+
+        /////////////////////////////
+        let lewy = wynik(wartosci, TEST);
+        let prawy = wynik(wartosci2, TSET);
+        console.log(lewy)
+        console.log(prawy)
+
+        if (lewy > prawy)
+            lewywin()
+        else if (lewy < prawy)
+            prawywin()
+        else {
+            let wynik = porownajKosci(TEST, TSET);
+
+            if (wynik == 1)
+                lewywin()
+            else if (wynik == -1)
+                prawywin()
+            else
+                remis()
+        }
+
+        function lewywin() {
+            document.getElementById("lewywynik").style.color = "green"
+            document.getElementById("lewywynik").innerHTML = "<- Winner"
+            document.getElementById("prawywynik").style.color = "red"
+            document.getElementById("prawywynik").innerHTML = "Frajer ->"
+            wynikx++;
+            update()
+        }
+
+        function prawywin() {
+            document.getElementById("prawywynik").style.color = "green"
+            document.getElementById("lewywynik").style.color = "red"
+            document.getElementById("prawywynik").innerHTML = "Zwycięzca ->"
+            document.getElementById("lewywynik").innerHTML = "<- Przegryw"
+            wyniky++;
+            update()
+        }
+
+        function remis() {
+            document.getElementById("prawywynik").style.color = "red"
+            document.getElementById("lewywynik").style.color = "red"
+            document.getElementById("prawywynik").innerHTML = "rzucacie jeszcze raz"
+            document.getElementById("lewywynik").innerHTML = "remis 🥀"
+            document.getElementById("start").style.display = " ";
+
+        }
+
+        function update() {
+            document.getElementById("realnywynik").innerHTML = wynikx + "-" + wyniky;
+            if (wynikx < 2 && wyniky < 2)
+                document.getElementById("start").style.display ="";
+        }
+    }
+
+    function lewandowski(item, index) {
+        //TEST[index]=item.src.at(-5)
+        switch (item.innerHTML) {
+            case "⚀":
+                TEST[index] = 1;
+                break;
+            case "⚁":
+                TEST[index] = 2;
+                break;
+            case "⚂":
+                TEST[index] = 3;
+                break;
+            case "⚃":
+                TEST[index] = 4;
+                break;
+            case "⚄":
+                TEST[index] = 5;
+                break;
+            default:
+                TEST[index] = 6;
+                break;
+        }
+    }
+
+    function prawda(item, index) {
+        //TSET[index]=item.src.at(-5)
+        switch (item.innerHTML) {
+            case "⚀":
+                TSET[index] = 1;
+                break;
+            case "⚁":
+                TSET[index] = 2;
+                break;
+            case "⚂":
+                TSET[index] = 3;
+                break;
+            case "⚃":
+                TSET[index] = 4;
+                break;
+            case "⚄":
+                TSET[index] = 5;
+                break;
+            default:
+                TSET[index] = 6;
+                break;
+        }
+    }
+    // beta testerzy:
+    // ja 🗿
+
+    //////////////////////
+    function czyStritmaly(tab) {
+        let t = [...tab].sort((a, b) => a - b);
+
+        return (
+            (t[0] == 1 && t[1] == 2 && t[2] == 3 && t[3] == 4 && t[4] == 5)
+        );
+    }
+
+    function czyStritduzy(tab) {
+        let t = [...tab].sort((a, b) => a - b);
+
+        return (
+            (t[0] == 2 && t[1] == 3 && t[2] == 4 && t[3] == 5 && t[4] == 6)
+        );
+    }
+
+    function wynik(wartosci, tab) {
+
+        if (czyStritmaly(tab)) return 4;
+        if (czyStritduzy(tab)) return 5;
+
+        switch (wartosci.join(",")) {
+            case "5":
+                return 8; // poker
+            case "4,1":
+                return 7; // kareta
+            case "3,2":
+                return 6; // full
+            case "3,1,1":
+                return 3; // trójka
+            case "2,2,1":
+                return 2; // dwie pary
+            case "2,1,1,1":
+                return 1; // para
+            default:
+                return 0; // nic
+        }
+    }
+
+    function porownajKosci(tab1, tab2) {
+
+        function sortuj(tab) {
+            let licznik = {};
+
+            for (let x of tab) {
+                licznik[x] = (licznik[x] || 0) + 1;
+            }
+
+            return [...tab].sort((a, b) => {
+                if (licznik[b] != licznik[a])
+                    return licznik[b] - licznik[a];
+
+                return b - a;
+            });
+        }
+
+        let a = sortuj(tab1);
+        let b = sortuj(tab2);
+
+        for (let i = 0; i < 5; i++) {
+            if (a[i] > b[i]) return 1;
+            if (a[i] < b[i]) return -1;
+        }
+        
+        return 0;
+    }
+</script>
